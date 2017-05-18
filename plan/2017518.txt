@@ -1,0 +1,6 @@
+project plan:
+1. Enemy abstract class
+2. Tower abstract class
+3. Board abstract class
+4. Add basic subclasses
+5. Collision detection (driver file) -- Gabi
