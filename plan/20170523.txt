@@ -1,0 +1,23 @@
+- Board abstract class
+- Basic subclasses to test
+  - graphics for each class
+
+- main file to be run with Processing
+  - initialization
+    - load static final Board(s)
+
+  - every level
+    - ask user to place Towers
+    - calculate Enemies and interval for level based on currentLevel (+ difficulty?)
+      - enqueue Enemies into java.util.concurrent.DelayQueue
+    - every frame
+      - remove Enemy from DelayQueue if possible
+        - add onto board (quad tree) at start position
+      - check if Enemies have reached the finish line
+        - decrease health, die?
+      - detect Enemy collision with Projectile [in range of Tower?]
+        - decrease health, die?
+      - update
+        - Enemy position
+    - progress to next level if queue empty and no enemies on board
+
