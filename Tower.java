@@ -13,6 +13,10 @@ public abstract class Tower {
     return radius;
   }
 
+    float[] getCoords(){
+	return coords;
+    }
+
   void setRadius(float radius) {
     this.radius = radius;
   }
