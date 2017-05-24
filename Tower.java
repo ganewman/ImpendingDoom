@@ -9,15 +9,27 @@ public abstract class Tower {
     coords[1] = y;
   }
 
-  public void setRadius(float radius) {
+  float getRadius() {
+    return radius;
+  }
+
+  void setRadius(float radius) {
     this.radius = radius;
   }
 
-  public void setStrength(int strength) {
+  float getStrength() {
+    return strength;
+  }
+
+  void setStrength(int strength) {
     this.strength = strength;
   }
 
-  public void setRate(int rate) {
+  float getRate() {
+    return rate;
+  }
+
+  void setRate(int rate) {
     this.rate = rate;
   }
 }
