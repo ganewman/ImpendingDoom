@@ -1,2 +1,39 @@
-2017-5-18
-Gabi: Created devlog.
+2017-05-23	Jeffrey Lin
+Add source for UML, flowchart; add proposal
+
+==========
+
+2017-05-22	Jeffrey Lin
+Add plan/20170523.txt
+
+==========
+
+2017-05-22	Jeffrey Lin
+Add tool to update devlog
+
+==========
+
+2017-05-22	Gabi Newman
+Add abstract Projectile class
+
+==========
+
+2017-05-18	Jeffrey Lin
+Add Enemy and Tower abstract classes
+
+==========
+
+2017-05-18	Gabi Newman
+Add plan for 5/18
+
+==========
+
+2017-05-18	Gabi Newman
+Add devlog
+
+==========
+
+2017-05-18	Gabi Newman
+Initial commit
+==========
+
