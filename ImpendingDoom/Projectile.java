@@ -4,15 +4,14 @@ public abstract class Projectile {
     private int strength;
 
     float getSpeed() {
-      return speed;
+        return speed;
     }
 
     float[] getCoordinates() {
-      return coords;
+        return coords;
     }
 
     int getStrength() {
-      return strength;
+        return strength;
     }
 }
-
