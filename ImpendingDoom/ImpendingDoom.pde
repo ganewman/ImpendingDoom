@@ -1,33 +1,44 @@
-
 final Board board = new Board();
-Button playButton;
-boolean gameStarted = false;
+final Button playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
+
+boolean gameStarted;
+boolean levelRunning;
+
+final color BG = #5C00C6;
 
 void setup() {
   size(700, 700);
-  background(#5C00C6);
+  background(BG);
   noStroke();
-  playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
 }
 
 
 void draw() {
-  if (! gameStarted) { 
+  if (! gameStarted) {
     titleScreen();
   }
-  if (playButton.clicked()){
+
+  if (playButton.clicked()) {
     gameStarted = true;
-    background(0);
+    play();
   }
 }
 
 void titleScreen() {
-  String s = "Tower Defense";
   fill(#809B85);
   textSize(50);
   textAlign(CENTER, CENTER);
-  text(s, width / 2, height / 2 - 120);
+  text("Tower Defense", width / 2, height / 2 - 120);
   textSize(20);
   text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
   playButton.draw();
 }
+
+void play() {
+  if ( levelRunning ) {
+
+  } else {
+
+  }
+}
+

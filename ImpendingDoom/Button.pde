@@ -1,54 +1,56 @@
 import processing.core.PApplet;
 public class Button {
   PFont buttonFont;
-  float x;
-  float y;
-  final float buttonWidth;
-  final float buttonHeight;
-  String buttonText;
+  final float X;
+  final float Y;
+  final float BUTTONWIDTH;
+  final float BUTTONHEIGHT;
+  final String BUTTONTEXT;
 
   Button(float xcor, float ycor, float width, float height, String text) {
-    x = xcor;
-    y = ycor;
-    buttonWidth = width;
-    buttonHeight = height;
-    buttonText = text;
+    X = xcor;
+    Y = ycor;
+    BUTTONWIDTH = width;
+    BUTTONHEIGHT = height;
+    BUTTONTEXT = text;
+  }
+
+  boolean inRect() {
+    return
+      mouseX > X - (BUTTONWIDTH / 2) &&
+      mouseX < X + (BUTTONWIDTH / 2) &&
+      mouseY > Y - (BUTTONHEIGHT / 2) &&
+      mouseY < Y + (BUTTONHEIGHT / 2);
+
   }
 
   void colorChange() {
-    if (
-      mouseX > x - (buttonWidth / 2) &&
-      mouseX < x + (buttonWidth / 2) &&
-      mouseY > y - (buttonHeight / 2) &&
-      mouseY < y + (buttonHeight / 2)) {
+    if ( inRect() ) {
       fill(#5C00C6);
-      rect(x, y, buttonWidth, buttonHeight);
+      rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
       fill(#809B85);
-      text(buttonText, x, y);
-      }
-    }
-    
-    boolean clicked(){
-      return  mousePressed && 
-      mouseX > x - (buttonWidth / 2) &&
-      mouseX < x + (buttonWidth / 2) &&
-      mouseY > y - (buttonHeight / 2) &&
-      mouseY < y + (buttonHeight / 2);
-    }
-    void setup() {
-      buttonFont = loadFont("AgencyFB-Reg-48.vlw");
-      textFont(buttonFont);
-    }
-
-
-    void draw() {
-      rectMode(CENTER);  
-      fill(#809B85);
-
-      rect(x, y, buttonWidth, buttonHeight);
-
-      fill(#5C00C6);
-      text(buttonText, x, y);
-      colorChange();
+      text(BUTTONTEXT, X, Y);
     }
   }
+
+  boolean clicked() {
+    return mousePressed && inRect();
+  }
+
+  void setup() {
+    buttonFont = loadFont("AgencyFB-Reg-48.vlw");
+    textFont(buttonFont);
+  }
+
+  void draw() {
+    rectMode(CENTER);
+    fill(#809B85);
+
+    rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
+
+    fill(#5C00C6);
+    text(BUTTONTEXT, X, Y);
+    colorChange();
+  }
+}
+
