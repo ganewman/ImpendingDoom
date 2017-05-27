@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Quadtree {
     private final ArrayList<Tower> towers = new ArrayList<>();
-    private final ArrayList<Enemy> enemies = new ArrayList<>();
+    private ArrayList<Enemy> enemies = new ArrayList<>();
     private final float X;
     private final float Y;
     private final float SIDELENGTH;
@@ -16,6 +16,7 @@ public class Quadtree {
         SIDELENGTH = length;
     }
 
+  void setup(){}
     void subdivide(){
         children[0] = new Quadtree(X + (SIDELENGTH / 2), Y, SIDELENGTH / 2);
         children[1] = new Quadtree(X, Y,SIDELENGTH / 2);
@@ -91,9 +92,14 @@ public class Quadtree {
         towers.add(t);
 
     }
+    
+    ArrayList<Enemy> clearEnemies(){
+      ArrayList<Enemy> retAL = enemies;
+      enemies = null;
+      return retAL;
+    }
 
     Quadtree[] getChildren() {
         return children;
     }
 }
-

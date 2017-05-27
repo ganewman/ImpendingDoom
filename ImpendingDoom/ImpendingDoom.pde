@@ -1,5 +1,5 @@
 
-final Quadtree board = new Quadtree(0, 0, width);
+final Board board = new Board();
 Button playButton;
 boolean gameStarted = false;
 
