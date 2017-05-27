@@ -1,7 +1,7 @@
 public abstract class Enemy {
-    private float speed = 1;
-    private float[] coords = new float[2];
-    private int health = 1;
+    float speed = 1;
+    float[] coords = new float[2];
+    int health = 1;
 
     public int getHealth() {
         return health;

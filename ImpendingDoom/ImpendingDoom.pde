@@ -1,5 +1,5 @@
 final Board board = new Board();
-final Button playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
+Button playButton;
 
 boolean gameStarted;
 boolean levelRunning;
@@ -10,6 +10,7 @@ void setup() {
   size(700, 700);
   background(BG);
   noStroke();
+  playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
 }
 
 
@@ -36,9 +37,7 @@ void titleScreen() {
 
 void play() {
   if ( levelRunning ) {
-
+    board.draw();
   } else {
-
   }
 }
-
