@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Quadtree {
-    private final ArrayList<Tower> towers = new ArrayList<>();
-    private ArrayList<Enemy> enemies = new ArrayList<>();
+    private final ArrayList<Tower> towers = new ArrayList<Tower>();
+    private ArrayList<Enemy> enemies = new ArrayList<Enemy>();
     private final float X;
     private final float Y;
     private final float SIDELENGTH;
@@ -45,6 +45,7 @@ public class Quadtree {
     }
 
     void addEnemy(Enemy e) {
+      
         numObjects++;
         if (numObjects >= MAXOBJECTS){
             subdivide();
@@ -53,6 +54,7 @@ public class Quadtree {
             enemies.add(e);
             return;
         }
+        
         for (Quadtree child : children){
             if (child.contains(e.getCoords())){
                 child.addEnemy(e);

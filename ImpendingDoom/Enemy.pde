@@ -1,4 +1,5 @@
 public abstract class Enemy {
+  
     float speed = 1;
     float[] coords = new float[2];
     int health = 1;
