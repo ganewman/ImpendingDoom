@@ -1,8 +1,5 @@
-public class TowerA extends Tower{
-  TowerA(float x, float y, PImage img){
-    super(x, y, img);
-    
+class TowerA extends Tower {
+  TowerA(float x, float y) {
+    super(x, y, towerImages[0]);
   }
-  
- 
 }

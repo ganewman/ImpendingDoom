@@ -1,17 +1,12 @@
-public abstract class Projectile {
-    private float speed = 1;
-    private float[] coords = new float[2];
-    private int strength;
+public abstract class Projectile extends Placable {
+  float speed = 1;
+  int strength;
 
-    float getSpeed() {
-        return speed;
-    }
+  float getSpeed() {
+    return speed;
+  }
 
-    float[] getCoordinates() {
-        return coords;
-    }
-
-    int getStrength() {
-        return strength;
-    }
+  int getStrength() {
+    return strength;
+  }
 }

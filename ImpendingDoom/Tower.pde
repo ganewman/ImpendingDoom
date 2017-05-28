@@ -1,27 +1,17 @@
-public abstract class Tower {
-  private float radius = 5;
-  private float rate = 1;
-  private float[] coords = new float[2];
-  private int strength = 1;
-  PImage img;
+public abstract class Tower extends Placable {
+  float radius = 5;
+  float rate = 1;
+  int strength = 1;
 
-  public Tower(float x, float y, PImage img) {
-    coords[0] = x;
-    coords[1] = y;
-    this.img = img;
+  Tower(float x, float y, PImage imgg) {
+    X = x;
+    Y = y;
+    img = imgg;
+
   }
-
-  void draw() {
-    image(img, x, y);
-  }
-
 
   float getRadius() {
     return radius;
-  }
-
-  float[] getCoords() {
-    return coords;
   }
 
   void setRadius(float radius) {

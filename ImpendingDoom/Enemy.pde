@@ -1,27 +1,45 @@
-public abstract class Enemy {
-  
-    float speed = 1;
-    float[] coords = new float[2];
-    int health = 1;
+abstract class Enemy extends Placable {
 
-    public int getHealth() {
-        return health;
-    }
+  float speed = 1;
+  int health = 1;
 
-    public void decrementHealth() {
-        health--;
-    }
+  final long delay;
+  long blockUntil;
 
-    public float getSpeed() {
-        return speed;
-    }
+  Enemy(long delay) {
+    this.delay = delay;
+  }
 
-    public float[] getCoords() {
-        return coords;
+  //
+  void startDelay() {
+    if ( blockUntil == 0 ) {
+      blockUntil = System.currentTimeMillis() + delay;
     }
+  }
 
-    public void setCoords(float x, float y) {
-        this.coords[0] = x;
-        this.coords[1] = y;
-    }
+  long timeLeft() {
+    return blockUntil - System.currentTimeMillis();
+  }
+
+
+  int getHealth() {
+    return health;
+  }
+
+  void decrementHealth() {
+    health--;
+  }
+
+  float getSpeed() {
+    return speed;
+  }
+
+  void setCoords(float x, float y) {
+    this.X = x;
+    this.Y = y;
+  }
+
+  // FIXME: implement me please
+  void update() {
+  }
 }

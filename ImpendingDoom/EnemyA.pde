@@ -1,14 +1,5 @@
-public class EnemyA extends Enemy {
-  EnemyA(PImage img) {
-    blob = img;
-  }
-
-
-
-  PImage blob;
-
-
-  void draw() {
-    image(blob, 100, 100);
+class EnemyA extends Enemy {
+  EnemyA(long delay) {
+    super(delay);
   }
 }

@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+
 public class Button {
   PFont buttonFont;
   final float X;
@@ -21,7 +22,6 @@ public class Button {
       mouseX < X + (BUTTONWIDTH / 2) &&
       mouseY > Y - (BUTTONHEIGHT / 2) &&
       mouseY < Y + (BUTTONHEIGHT / 2);
-
   }
 
   void colorChange() {
