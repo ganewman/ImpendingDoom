@@ -14,6 +14,7 @@ public class Quadtree {
     X = x;
     Y = y;
     SIDELENGTH = length;
+    numObjects = 0;
   }
 
   void setup() {
@@ -23,6 +24,7 @@ public class Quadtree {
     children[1] = new Quadtree(X, Y, SIDELENGTH / 2);
     children[2] = new Quadtree(X, Y + (SIDELENGTH / 2), SIDELENGTH / 2);
     children[3] = new Quadtree(X + (SIDELENGTH / 2), Y + (SIDELENGTH / 2), SIDELENGTH / 2);
+    numObjects = 0;
     for (Tower t : towers) {
       addTower(t);
     }
