@@ -1,3 +1,25 @@
+2017-05-30	Jeffrey Lin
+Use author name instead in devlog
+
+==========
+
+2017-05-25	Jeffrey Lin
+Add editorconfig file; update gitignore
+
+==========
+
+2017-05-24	Jeffrey Lin
+Add accessors, mutators for Projectile, Tower
+
+==========
+
+2017-05-25	Jeffrey Lin
+Add devlog as of a68bf61
+
+Fixes #1
+
+==========
+
 2017-05-23	Jeffrey Lin
 Add source for UML, flowchart; add proposal
 

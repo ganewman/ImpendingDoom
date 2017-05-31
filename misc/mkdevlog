@@ -5,6 +5,6 @@
 set -euo pipefail
 
 DEVLOG="$(git rev-parse --show-toplevel)/devlog.txt"
-git log --date=short --pretty="%ad%x09%cn%n%B%n==========%n" | \
+git log --date=short --pretty="%ad%x09%aN%n%B%n==========%n" | \
     sed -e 's/gnewman00/Gabi Newman/g' > "$DEVLOG"
 
