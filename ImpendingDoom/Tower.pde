@@ -7,7 +7,6 @@ public abstract class Tower extends Placable {
     X = x;
     Y = y;
     img = imgg;
-
   }
 
   float getRadius() {

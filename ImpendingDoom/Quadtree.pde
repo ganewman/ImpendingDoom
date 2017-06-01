@@ -31,47 +31,62 @@ public class Quadtree {
     }
   }
 
-  boolean contains(float[] point) {
-    return
-      (point[0] > X &&
-       point[0] < X + SIDELENGTH &&
-       point[1] > Y &&
-       point[1] < Y + SIDELENGTH);
+// credit to the wonderful Joshua Turcotti for this formula which checks whether a circle is within a certain square
+  boolean contains(Tower t) {
+    float[] quadCenter = { X + SIDELENGTH / 2, Y + SIDELENGTH / 2};
+    float[] tCenter = t.getCoords();
+    double squareRadius =
+      dist(tCenter[0], tCenter[1], X, Y)
+      * (SIDELENGTH / 2)
+      / abs(tCenter[1] - X);
+    return (abs(tCenter[0] - quadCenter[0]) + t.getRadius() < SIDELENGTH / 2) &&
+      (abs(t.getCoords()[1] - quadCenter[1]) + t.getRadius() < SIDELENGTH / 2);
   }
+
+     boolean contains(Enemy e) {
+       float[] enemyCoords = e.getCoords();
+    return
+      (enemyCoords[0] > X &&
+       enemyCoords[0] < X + SIDELENGTH &&
+       enemyCoords[1] > Y &&
+       enemyCoords[1] < Y + SIDELENGTH);
+
+  }
+
 
   float[] getCoords() {
     return new float[] {X, Y};
   }
 
   void addEnemy(Enemy e) {
-
-    numObjects++;
     if (numObjects >= MAXOBJECTS) {
       subdivide();
     }
+
+    numObjects++;
     if (children[0] == null) {
       enemies.add(e);
       return;
     }
 
     for (Quadtree child : children) {
-      if (child.contains(e.getCoords())) {
+      if (child.contains(e)) {
         child.addEnemy(e);
       }
     }
-    enemies.add(e);
   }
 
   boolean removeEnemy(Enemy target) {
-    for (Enemy e : enemies) {
-      if (e.equals(target)) {
-        enemies.remove(e);
+    if ( enemies.remove(target) ) {
+      return true;
+    }
+
+    for (Quadtree child : children) {
+      if ( child.removeEnemy(target) ) {
         return true;
       }
     }
-    for (Quadtree child : children) {
-      child.removeEnemy(target);
-    }
+
     return false;
   }
 
@@ -80,17 +95,19 @@ public class Quadtree {
     if (numObjects >= MAXOBJECTS) {
       subdivide();
     }
+
+    numObjects++;
     if (children[0] == null) {
       towers.add(t);
       return;
     }
+
     for (Quadtree child : children) {
-      if (child.contains(t.getCoords())) {
+      if (child.contains(t)) {
         child.addTower(t);
         return;
       }
     }
-    towers.add(t);
   }
 
   ArrayList<Enemy> clearAllEnemies() {
@@ -98,13 +115,13 @@ public class Quadtree {
     enemies = new ArrayList<Enemy>();
 
     for ( Quadtree q : children ) {
-      if ( q == null ) { continue; }
-      ArrayList<Enemy> retAL2 = q.clearAllEnemies();
-
-      for ( Enemy e : retAL2 ) {
-        retAL.add(e);
+      if ( q == null ) {
+        continue;
       }
+
+      retAL.addAll(q.clearAllEnemies());
     }
+
     return retAL;
   }
 

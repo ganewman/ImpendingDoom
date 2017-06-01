@@ -4,7 +4,9 @@ abstract class Placable {
   PImage img;
 
   void draw() {
-    image(img, X, Y);
+    image(img, 
+      X - (img.width / 2), 
+      Y - (img.height / 2));
   }
 
   float[] getCoords() {
