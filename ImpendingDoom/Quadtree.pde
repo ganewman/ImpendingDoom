@@ -31,7 +31,7 @@ public class Quadtree {
     }
   }
 
-// credit to the wonderful Joshua Turcotti for this formula which checks whether a circle is within a certain square
+  // credit to the wonderful Joshua Turcotti for this formula which checks whether a circle is within a certain square
   boolean contains(Tower t) {
     float[] quadCenter = { X + SIDELENGTH / 2, Y + SIDELENGTH / 2};
     float[] tCenter = t.getCoords();
@@ -43,16 +43,14 @@ public class Quadtree {
       (abs(t.getCoords()[1] - quadCenter[1]) + t.getRadius() < SIDELENGTH / 2);
   }
 
-     boolean contains(Enemy e) {
-       float[] enemyCoords = e.getCoords();
+  boolean contains(Enemy e) {
+    float[] enemyCoords = e.getCoords();
     return
       (enemyCoords[0] > X &&
        enemyCoords[0] < X + SIDELENGTH &&
        enemyCoords[1] > Y &&
        enemyCoords[1] < Y + SIDELENGTH);
-
   }
-
 
   float[] getCoords() {
     return new float[] {X, Y};
@@ -113,15 +111,14 @@ public class Quadtree {
   ArrayList<Enemy> clearAllEnemies() {
     ArrayList<Enemy> retAL = enemies;
     enemies = new ArrayList<Enemy>();
+    numObjects = 0;
 
     for ( Quadtree q : children ) {
-      if ( q == null ) {
-        continue;
+      if ( q != null ) {
+        q.numObjects = 0;
+        retAL.addAll(q.clearAllEnemies());
       }
-
-      retAL.addAll(q.clearAllEnemies());
     }
-
     return retAL;
   }
 

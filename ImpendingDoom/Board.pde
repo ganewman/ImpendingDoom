@@ -44,14 +44,11 @@ public class Board {
   void update() {
     enemiesOnBoard = boardMap.clearAllEnemies();
 
-    for ( Enemy e : enemiesOnBoard ) {
-      e.update();
-    }
 
     for ( Enemy e : enemiesOnBoard ) {
+      e.update();
       boardMap.addEnemy(e);
     }
-    System.out.println(enemiesOnBoard);
   }
 
   boolean isEmpty() {
