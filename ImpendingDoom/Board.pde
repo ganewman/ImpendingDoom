@@ -1,5 +1,5 @@
 public class Board {
-  final Quadtree boardMap = new Quadtree(0, 0, width);
+  Quadtree boardMap;
   ArrayList<Enemy> enemiesOnBoard = new ArrayList<Enemy>();
   final ArrayList<Tower> towers = new ArrayList<Tower>();
 
@@ -18,15 +18,22 @@ public class Board {
 
   void addEnemy(Enemy e) {
     boardMap.addEnemy(e);
+    enemiesOnBoard.add(e);
   }
 
   void update() {
-    if ( boardMap.enemies == null ) {
-      return;
-    }
+    enemiesOnBoard = boardMap.clearAllEnemies();
 
-    for ( Enemy e : boardMap.enemies ) {
+    for ( Enemy e : enemiesOnBoard ) {
       e.update();
     }
+
+    for ( Enemy e : enemiesOnBoard ) {
+      boardMap.addEnemy(e);
+    }
+  }
+
+  boolean isEmpty() {
+    return enemiesOnBoard.isEmpty();
   }
 }

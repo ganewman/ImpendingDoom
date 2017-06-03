@@ -17,8 +17,6 @@ public class Quadtree {
     numObjects = 0;
   }
 
-  void setup() {
-  }
   void subdivide() {
     children[0] = new Quadtree(X + (SIDELENGTH / 2), Y, SIDELENGTH / 2);
     children[1] = new Quadtree(X, Y, SIDELENGTH / 2);
@@ -35,12 +33,11 @@ public class Quadtree {
 
   boolean contains(float[] point) {
     return
-      point[0] < X + SIDELENGTH &&
-      point[0] > X &&
-      point[1] < Y &&
-      point[1] > Y + SIDELENGTH;
+      (point[0] > X &&
+       point[0] < X + SIDELENGTH &&
+       point[1] > Y &&
+       point[1] < Y + SIDELENGTH);
   }
-
 
   float[] getCoords() {
     return new float[] {X, Y};
@@ -90,14 +87,24 @@ public class Quadtree {
     for (Quadtree child : children) {
       if (child.contains(t.getCoords())) {
         child.addTower(t);
+        return;
       }
     }
     towers.add(t);
   }
 
-  ArrayList<Enemy> clearEnemies() {
+  ArrayList<Enemy> clearAllEnemies() {
     ArrayList<Enemy> retAL = enemies;
-    enemies = null;
+    enemies = new ArrayList<Enemy>();
+
+    for ( Quadtree q : children ) {
+      if ( q == null ) { continue; }
+      ArrayList<Enemy> retAL2 = q.clearAllEnemies();
+
+      for ( Enemy e : retAL2 ) {
+        retAL.add(e);
+      }
+    }
     return retAL;
   }
 
@@ -105,3 +112,4 @@ public class Quadtree {
     return children;
   }
 }
+

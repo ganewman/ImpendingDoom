@@ -18,6 +18,7 @@ void setup() {
   size(900, 900);
   background(BG);
   noStroke();
+  board.boardMap = new Quadtree(0, 0, width);
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
 
   for ( int i = 0; i < enemyImages.length; i++ ) {
@@ -72,26 +73,28 @@ void play() {
       board.addEnemy(dqueue.poll());
     }
 
-    if ( dqueue.isEmpty() ) {
+    if ( dqueue.isEmpty() && board.isEmpty() ) {
       levelRunning = false;
     }
+    if ( board.enemiesOnBoard != null ) { board.update(); }
   } else {
-    placeTowers();
     generateQueue();
+    placeTowers();
   }
 }
 
 void mousePressed() {
+
+  if ( playButton.clicked() ) {
+    gameStarted = true;
+    levelRunning = false;
+    return;
+  }
   if ( ! levelRunning ) {
     // give the user a chance to place towers
     Tower t = new TowerA((float)mouseX, (float)mouseY);
     board.addTower(t);
     levelRunning = true;
     return;
-  }
-
-  if ( playButton.clicked() ) {
-    gameStarted = true;
-    levelRunning = false;
   }
 }
