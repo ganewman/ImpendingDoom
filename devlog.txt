@@ -1,61 +1,170 @@
-2017-05-30	Jeffrey Lin
+2017-06-03  Gabi Newman
+Add formula to check if circle is within square
+
+==========
+
+2017-05-31  Jeffrey Lin
+Create a path for enemies to walk on
+
+==========
+
+2017-06-03  Jeffrey Lin
+Miscellany
+
+==========
+
+2017-05-28  Gabi Newman
+Quick fix for bug causing infinite loop
+
+==========
+
+2017-05-28  Jeffrey Lin
+Create Placable class to consolidate methods
+
+- Enemy, Tower, Projectile extend Placable.
+
+- Import more towers and enemies.
+
+- Move some logic to mousePressed().
+
+- Rename enemy.png and tower.png for consistency.
+
+==========
+
+2017-05-27  Gabi Newman
+Large patch containing small improvements :^)
+
+- Add chicken.png.
+
+- Init TowerA class.
+
+- Rename {}.java -> {}.pde.
+
+- Add a way to place towers.
+
+- ?
+
+==========
+
+2017-05-27  Jeffrey Lin
+Make enemy background transparent
+
+- Add tower picture
+
+- Add towers and enemies 2, 3, 4 :^)
+
+==========
+
+2017-05-27  Gabi Newman
+Some stuff
+
+- Add setup(), draw() to Board.
+
+- Remove protection for some things.
+
+- Init EnemyA class.
+
+- Init playButton in setup().
+
+- Add initial enemy.png.
+
+==========
+
+2017-05-27  Jeffrey Lin
+Use final variables in Button
+
+Move some redundant code to separate functions.
+
+==========
+
+2017-05-27  Gabi Newman
+Add functionality to Quadtree and add Board class
+
+==========
+
+2017-05-27  Gabi Newman
+Add a title screen
+
+==========
+
+2017-05-26  Jeffrey Lin
+Add initial Driver file
+
+==========
+
+2017-06-01  Jeffrey Lin
+Housekeeping
+
+Add PDF of flowchart, UML, plans.
+
+==========
+
+2017-05-30  Jeffrey Lin
 Use author name instead in devlog
 
 ==========
 
-2017-05-25	Jeffrey Lin
+2017-05-24  Gabi Newman
+Add Quadtree class
+
+Decreases the time required to find a given Enemy and Tower. This leads
+to faster collision detection.
+
+==========
+
+2017-05-25  Jeffrey Lin
 Add editorconfig file; update gitignore
 
 ==========
 
-2017-05-24	Jeffrey Lin
+2017-05-24  Jeffrey Lin
 Add accessors, mutators for Projectile, Tower
 
 ==========
 
-2017-05-25	Jeffrey Lin
+2017-05-25  Jeffrey Lin
 Add devlog as of a68bf61
 
 Fixes #1
 
 ==========
 
-2017-05-23	Jeffrey Lin
+2017-05-23  Jeffrey Lin
 Add source for UML, flowchart; add proposal
 
 ==========
 
-2017-05-22	Jeffrey Lin
+2017-05-22  Jeffrey Lin
 Add plan/20170523.txt
 
 ==========
 
-2017-05-22	Jeffrey Lin
+2017-05-22  Jeffrey Lin
 Add tool to update devlog
 
 ==========
 
-2017-05-22	Gabi Newman
+2017-05-22  Gabi Newman
 Add abstract Projectile class
 
 ==========
 
-2017-05-18	Jeffrey Lin
+2017-05-18  Jeffrey Lin
 Add Enemy and Tower abstract classes
 
 ==========
 
-2017-05-18	Gabi Newman
+2017-05-18  Gabi Newman
 Add plan for 5/18
 
 ==========
 
-2017-05-18	Gabi Newman
+2017-05-18  Gabi Newman
 Add devlog
 
 ==========
 
-2017-05-18	Gabi Newman
+2017-05-18  Gabi Newman
 Initial commit
 ==========
 
