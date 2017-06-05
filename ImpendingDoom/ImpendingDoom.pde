@@ -1,12 +1,14 @@
 import java.util.concurrent.LinkedBlockingQueue;
 
-Board board;
-Button playButton;
+static Board board;
+static Button playButton;
 
-boolean gameStarted;
-boolean levelRunning = true; // prevent placing during title screen
-boolean levelGenerated;
-int level = 1;
+static boolean gameStarted;
+static boolean levelRunning = true; // prevent placing during title screen
+static boolean levelGenerated;
+
+static int level = 1;
+static int health = 10;
 
 final color BG = #5C00C6;
 final int INITIAL_SPEED = 3000;
@@ -68,7 +70,7 @@ void placeTowers() {
 }
 
 void generatePath() {
-    //FIXME: Find a way to programically generate a random path
+  //FIXME: Find a way to programically generate a random path
   float[] edge1 = new float[] {0, 0};
   float[] edge2 = new float[] {900, 900};
   float dy = (edge2[1] - edge1[1]) / edge2[1];
@@ -89,6 +91,11 @@ void generateLevel() {
 }
 
 void play() {
+  if ( health <= 0 ) {
+    System.out.println("GAME OVER JERK");
+    exit();
+  }
+
   board.draw();
 
   if ( ! levelRunning ) {
@@ -129,4 +136,3 @@ void mousePressed() {
     return;
   }
 }
-

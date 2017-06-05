@@ -118,6 +118,11 @@ public class Quadtree {
           if (e.getHealth() <= 0) {
             ite.remove();
           }
+          
+          if (e.ALpos > e.path.size() ) {
+            ite.remove();
+            health -= e.getHealth();
+          }
         }
       }
     }

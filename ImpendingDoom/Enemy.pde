@@ -81,4 +81,3 @@ class Enemy4 extends Enemy {
     img = enemyImages[3];
   }
 }
-
