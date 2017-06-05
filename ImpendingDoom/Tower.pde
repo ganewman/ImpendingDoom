@@ -1,5 +1,5 @@
 public abstract class Tower extends Placable {
-  float radius = 5;
+  float radius = 200;
   float rate = 1;
   int strength = 1;
 
@@ -11,6 +11,9 @@ public abstract class Tower extends Placable {
   float getRadius() {
     return radius;
   }
+
+void draw() {    ellipse(X, Y, this.getRadius(), this.getRadius());}
+
 
   void setRadius(float radius) {
     this.radius = radius;
@@ -64,4 +67,3 @@ class Tower4 extends Tower {
     img = towerImages[3];
   }
 }
-

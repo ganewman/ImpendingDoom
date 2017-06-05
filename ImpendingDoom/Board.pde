@@ -49,6 +49,7 @@ public class Board {
       e.update();
       boardMap.addEnemy(e);
     }
+    boardMap.detectCollisions();
   }
 
   boolean isEmpty() {
@@ -60,4 +61,3 @@ public class Board {
     path = l;
   }
 }
-

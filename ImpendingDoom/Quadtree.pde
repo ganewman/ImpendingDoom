@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Quadtree {
   final ArrayList<Tower> towers = new ArrayList<Tower>();
@@ -47,9 +47,9 @@ public class Quadtree {
     float[] enemyCoords = e.getCoords();
     return
       (enemyCoords[0] > X &&
-       enemyCoords[0] < X + SIDELENGTH &&
-       enemyCoords[1] > Y &&
-       enemyCoords[1] < Y + SIDELENGTH);
+      enemyCoords[0] < X + SIDELENGTH &&
+      enemyCoords[1] > Y &&
+      enemyCoords[1] < Y + SIDELENGTH);
   }
 
   float[] getCoords() {
@@ -108,6 +108,27 @@ public class Quadtree {
     }
   }
 
+  void detectCollisions() {
+    for (Tower t : towers) {
+      Iterator<Enemy> ite = enemies.iterator();
+      while (ite.hasNext()) {
+        Enemy e = ite.next();
+        if (dist(e.getCoords()[0], e.getCoords()[1], t.getCoords()[0], t.getCoords()[1]) <= t.getRadius()) {
+          e.decrementHealth();
+          if (e.getHealth() <= 0) {
+            ite.remove();
+          }
+        }
+      }
+    }
+    
+    for (Quadtree q : children){
+      if (q != null){
+        q.detectCollisions();
+      }
+    }
+  }
+
   ArrayList<Enemy> clearAllEnemies() {
     ArrayList<Enemy> retAL = enemies;
     enemies = new ArrayList<Enemy>();
@@ -126,4 +147,3 @@ public class Quadtree {
     return children;
   }
 }
-

@@ -7,6 +7,9 @@ abstract class Placable {
     image(img, 
       X - (img.width / 2), 
       Y - (img.height / 2));
+      if (this instanceof Tower) {
+        this.draw();
+      }
   }
 
   float[] getCoords() {
