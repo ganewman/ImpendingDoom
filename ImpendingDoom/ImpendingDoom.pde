@@ -82,7 +82,7 @@ void generatePath() {
 void generateLevel() {
   for ( int i = 0; i < level * random(level / 5, level * 2); i++ ) {
     // FIXME: Find a way to add different enemies based on level.
-    dqueue.add(new EnemyA(INITIAL_SPEED / level, path));
+    dqueue.add(new Enemy1(INITIAL_SPEED / level, path));
   }
 
   levelGenerated = true;
@@ -123,7 +123,7 @@ void mousePressed() {
 
   if ( ! levelRunning ) {
     // give the user a chance to place towers
-    Tower t = new TowerA((float)mouseX, (float)mouseY);
+    Tower t = new Tower1((float)mouseX, (float)mouseY);
     board.addTower(t);
     levelRunning = true;
     return;
