@@ -1,4 +1,4 @@
-abstract class Enemy extends Placable {
+abstract class Enemy extends Placeable {
   ArrayList<Float[]> path;
   int ALpos;
   float speed = 1;
@@ -36,7 +36,6 @@ abstract class Enemy extends Placable {
   float getSpeed() {
     return speed;
   }
-
 
   void setCoords(float x, float y) {
     X = x;

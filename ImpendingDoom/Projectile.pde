@@ -1,4 +1,4 @@
-public abstract class Projectile extends Placable {
+public abstract class Projectile extends Placeable {
   float speed = 1;
   int strength;
 

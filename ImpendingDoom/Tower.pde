@@ -1,4 +1,4 @@
-public abstract class Tower extends Placable {
+public abstract class Tower extends Placeable {
   float radius = 200;
   float rate = 1;
   int strength = 1;
@@ -12,8 +12,11 @@ public abstract class Tower extends Placable {
     return radius;
   }
 
-void draw() {    ellipse(X, Y, this.getRadius(), this.getRadius());}
-
+  @Override void draw() {
+    // XXX: debug purposes
+    ellipse(X, Y, this.getRadius(), this.getRadius());
+    image(img, X - (img.width / 2), Y - (img.height / 2));
+  }
 
   void setRadius(float radius) {
     this.radius = radius;
