@@ -122,6 +122,8 @@ public class Quadtree {
           // more health vs. lower check rate?
           if ( frameCount % ( difficulty / t.getRate() ) == 0 && e.decrementHealth() <= 0 ) {
             ite.remove();
+            score += (difficulty * e.INITIAL_HEALTH);
+            currency += (e.INITIAL_HEALTH / difficulty);
           }
         }
 

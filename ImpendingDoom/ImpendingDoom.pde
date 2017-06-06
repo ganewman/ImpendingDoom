@@ -7,15 +7,19 @@ static final Random prng = new Random();
 
 static Board board;
 static Button playButton;
+static DifficultyButton difficultyButton;
 
 static boolean gameStarted;
 static boolean levelRunning = true; // prevent placing during title screen
 static boolean levelGenerated;
 
+static int currency;
+static int score;
+
 static final color BG = #5C00C6;
 static final int INITIAL_DELAY = 3000;
 
-static int difficulty = 1; // really should be final but oh well // FIXME: set on titlescreen
+static int difficulty = 2;
 static int level = 1;
 static int playerHealth = 10;
 static int delay = INITIAL_DELAY;
@@ -38,6 +42,7 @@ void setup() {
   noStroke();
 
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
+  difficultyButton = new DifficultyButton(width / 2, height / 3 * 2, 150, 75, "Normal");
 
   for ( int i = 0; i < NUM_ENEMIES; i++ ) {
     enemyImages[i] = loadImage("enemy" + (i + 1) + ".png");
@@ -64,18 +69,15 @@ void draw() {
   if ( gameStarted ) {
     play();
   } else {
-    titleScreen();
+    fill(#809B85);
+    textSize(50);
+    textAlign(CENTER, CENTER);
+    text("Tower Defense", width / 2, height / 2 - 120);
+    textSize(20);
+    text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
+    playButton.draw();
+    difficultyButton.draw();
   }
-}
-
-void titleScreen() {
-  fill(#809B85);
-  textSize(50);
-  textAlign(CENTER, CENTER);
-  text("Tower Defense", width / 2, height / 2 - 120);
-  textSize(20);
-  text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
-  playButton.draw();
 }
 
 void placeTowers() {
@@ -149,7 +151,18 @@ void mousePressed() {
   if ( playButton.clicked() ) {
     gameStarted = true;
     levelRunning = false;
+    difficulty = difficultyButton.state;
+
+    switch ( difficulty ) {
+      case 1: currency = 500; health = 100; break;
+      case 2: currency = 200; health =  50; break;
+      case 3: currency = 100; health =  20; break;
+    }
     return;
+  }
+
+  if ( ! gameStarted ) {
+    difficultyButton.clicked();
   }
 
   if ( ! levelRunning ) {

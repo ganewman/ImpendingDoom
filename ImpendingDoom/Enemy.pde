@@ -2,16 +2,18 @@ abstract class Enemy extends Placeable {
   ArrayList<Float[]> path;
   int ALpos;
   float speed = 1;
-  int health = 1;
+  final int INITIAL_HEALTH;
+  int health;
 
   final long delay;
   long blockUntil;
 
   Enemy(long delay, float speed, int health, ArrayList<Float[]> path) {
-    this.img = img;
     this.delay = delay;
+    this.speed = speed;
+    this.health = health;
+    INITIAL_HEALTH = health;
     this.path = path;
-    update();
   }
 
   void startDelay() {
