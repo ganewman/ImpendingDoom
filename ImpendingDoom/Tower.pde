@@ -7,6 +7,7 @@ public abstract class Tower extends Placeable {
   Tower(float x, float y, float radius, float rate, int cost) {
     X = x;
     Y = y;
+    this.radius = radius;
     this.rate = rate;
     this.cost = cost;
   }
@@ -39,6 +40,10 @@ public abstract class Tower extends Placeable {
 
   void setRate(int rate) {
     this.rate = rate;
+  }
+
+  int getCost() {
+    return cost;
   }
 }
 
@@ -73,4 +78,3 @@ class Tower4 extends Tower {
     img = towerImages[3];
   }
 }
-

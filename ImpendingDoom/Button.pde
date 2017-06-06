@@ -76,9 +76,15 @@ class DifficultyButton extends StatefulButton {
       }
 
       switch ( state ) {
-        case 1: buttonText = "Easy"; break;
-        case 2: buttonText = "Normal"; break;
-        case 3: buttonText = "Hard"; break;
+      case 1: 
+        buttonText = "Easy"; 
+        break;
+      case 2: 
+        buttonText = "Normal"; 
+        break;
+      case 3: 
+        buttonText = "Hard"; 
+        break;
       }
       return true;
     }
@@ -112,6 +118,7 @@ class TowerButton extends StatefulButton {
       rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
       fill(#5C00C6);
     }
-    image(towerImages[state - 1], X + BUTTONWIDTH / 2, Y + BUTTONHEIGHT / 2, 150, 150);
+    image(towerImages[state - 1], X, Y, 150, 150);
+    text(X, Y, ((Tower) (Utilities.createObject(towerList.get(state - 1), self, -1, -1))).getCost());
   }
 }
