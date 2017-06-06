@@ -95,13 +95,19 @@ void generatePath() {
   }
 }
 
+/** Generates a level.
+ * First allocates a "budget" for the level. Enemies are added to the dqueue, with their health
+ * values subtracted from the "budget".
+ */
 void generateLevel() {
-  for ( int i = 0; i < level * random(level / 5, level * 2); i++ ) {
-    // FIXME: Find a way to add different enemies based on level.
-    // currently picks a random one
-    // have a value for each enemy and a max value per level?
+  int threshold = level + ceil(random(level / 2, level * 10));
+
+  while ( threshold > 0 ) {
     String className = enemyList.get(prng.nextInt(enemyList.size()));
-    dqueue.add((Enemy) Utilities.createObject(className, self, delay, path));
+    Enemy tmp = (Enemy) Utilities.createObject(className, self, delay, path);
+
+    dqueue.add(tmp);
+    threshold -= tmp.getHealth();
   }
 
   levelGenerated = true;
