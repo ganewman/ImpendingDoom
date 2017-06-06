@@ -56,9 +56,15 @@ public class Button {
 /* Yes, this violates the "one class per file" policy too.
  */
 
-class DifficultyButton extends Button {
+class StatefulButton extends Button {
   int state = 1;
 
+  StatefulButton(float xcor, float ycor, float width, float height, String text) {
+    super(xcor, ycor, width, height, text);
+  }
+}
+
+class DifficultyButton extends StatefulButton {
   DifficultyButton(float xcor, float ycor, float width, float height, String text) {
     super(xcor, ycor, width, height, text);
   }
@@ -74,9 +80,38 @@ class DifficultyButton extends Button {
         case 2: buttonText = "Normal"; break;
         case 3: buttonText = "Hard"; break;
       }
+      return true;
     }
-
-    return true;
+    return false;
   }
 }
 
+class TowerButton extends StatefulButton {
+  TowerButton(float xcor, float ycor, float width, float height, String text) {
+    super(xcor, ycor, width, height, text);
+  }
+
+  boolean clicked() {
+    if ( mousePressed && inRect() ) {
+      if ( ++state > NUM_TOWERS ) {
+        state = 1;
+      }
+      return true;
+    }
+    return false;
+  }
+
+  @Override void draw() {
+    rectMode(CENTER);
+    if ( inRect() ) {
+      fill(#5C00C6);
+      rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
+      fill(#809B85);
+    } else {
+      fill(#809B85);
+      rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
+      fill(#5C00C6);
+    }
+    image(towerImages[state - 1], X + BUTTONWIDTH / 2, Y + BUTTONHEIGHT / 2, 150, 150);
+  }
+}

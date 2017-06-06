@@ -7,7 +7,9 @@ static final Random prng = new Random();
 
 static Board board;
 static Button playButton;
+static Button nextLevel;
 static DifficultyButton difficultyButton;
+static TowerButton currentTower;
 
 static boolean gameStarted;
 static boolean levelRunning = true; // prevent placing during title screen
@@ -42,7 +44,9 @@ void setup() {
   noStroke();
 
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
+  nextLevel = new Button(75, height - 150, 150, 75, "Next Level");
   difficultyButton = new DifficultyButton(width / 2, height / 3 * 2, 150, 75, "Normal");
+  currentTower = new TowerButton(width, 0, 150, 150, " ");
 
   for ( int i = 0; i < NUM_ENEMIES; i++ ) {
     enemyImages[i] = loadImage("enemy" + (i + 1) + ".png");
@@ -81,9 +85,14 @@ void draw() {
 }
 
 void placeTowers() {
-  textAlign(RIGHT, BOTTOM);
-  textSize(20);
-  text("Please select where to place tower", width/2, 40);
+  Tower t = (Tower) Utilities.createObject(
+      "ImpendingDoom$Tower" + currentTower.state, self, (float) mouseX, (float) mouseY);
+  if ( currency - t.cost < 0 ) {
+    return;
+  } else {
+    board.addTower(t);
+    currency -= t.cost;
+  }
 }
 
 void generatePath() {
@@ -122,10 +131,15 @@ void play() {
     exit();
   }
 
+  currentTower.draw();
   board.draw();
 
   if ( ! levelRunning ) {
-    placeTowers();
+    textAlign(RIGHT, BOTTOM);
+    textSize(20);
+    text("Please select where to place tower", width/2, 40);
+
+    nextLevel.draw();
     return;
   }
 
@@ -154,23 +168,23 @@ void mousePressed() {
     difficulty = difficultyButton.state;
 
     switch ( difficulty ) {
-      case 1: currency = 500; health = 100; break;
-      case 2: currency = 200; health =  50; break;
-      case 3: currency = 100; health =  20; break;
+      case 1: currency = 500; playerHealth = 100; return;
+      case 2: currency = 200; playerHealth =  50; return;
+      case 3: currency = 100; playerHealth =  20; return;
     }
-    return;
   }
 
   if ( ! gameStarted ) {
     difficultyButton.clicked();
+  } else {
+    if ( currentTower.clicked() ) {
+      return;
+    }
+    placeTowers();
   }
 
-  if ( ! levelRunning ) {
-    // give the user a chance to place towers
-    Tower t = new Tower1((float)mouseX, (float)mouseY);
-    board.addTower(t);
+  if ( ! levelRunning && nextLevel.clicked() ) {
     levelRunning = true;
-    return;
   }
 }
 
