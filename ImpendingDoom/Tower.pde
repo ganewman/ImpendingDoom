@@ -70,3 +70,4 @@ class Tower4 extends Tower {
     img = towerImages[3];
   }
 }
+

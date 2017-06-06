@@ -7,7 +7,6 @@ abstract class Enemy extends Placeable {
   final long delay;
   long blockUntil;
 
-
   Enemy(long delay, float speed, int health, ArrayList<Float[]> path) {
     this.img = img;
     this.delay = delay;
@@ -80,3 +79,4 @@ class Enemy4 extends Enemy {
     img = enemyImages[3];
   }
 }
+

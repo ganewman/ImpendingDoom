@@ -1,4 +1,9 @@
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.Random;
+
+static PApplet sketchApplet;
+static final ImpendingDoom self = new ImpendingDoom();
+static final Random prng = new Random();
 
 static Board board;
 static Button playButton;
@@ -7,31 +12,40 @@ static boolean gameStarted;
 static boolean levelRunning = true; // prevent placing during title screen
 static boolean levelGenerated;
 
+static final color BG = #5C00C6;
+static final int INITIAL_DELAY = 3000;
+
 static int level = 1;
 static int health = 10;
+static int delay = INITIAL_DELAY;
 
-final color BG = #5C00C6;
-final int INITIAL_SPEED = 3000;
+static final int NUM_ENEMIES = 4;
+static final int NUM_TOWERS = 4;
+static final PImage[] enemyImages = new PImage[NUM_ENEMIES];
+static final PImage[] towerImages = new PImage[NUM_TOWERS];
+static final List<String> enemyList = new ArrayList<String>();
+static final List<String> towerList = new ArrayList<String>();
 
-static final PImage[] enemyImages = new PImage[4];
-static final PImage[] towerImages = new PImage[4];
-final LinkedBlockingQueue<Enemy> dqueue = new LinkedBlockingQueue<Enemy>();
-
-final ArrayList<Float[]> path = new ArrayList<Float[]>();
+static final LinkedBlockingQueue<Enemy> dqueue = new LinkedBlockingQueue<Enemy>();
+static final ArrayList<Float[]> path = new ArrayList<Float[]>();
 
 void setup() {
+  sketchApplet = this;
+
   size(900, 900);
   background(BG);
   noStroke();
 
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
 
-  for ( int i = 0; i < enemyImages.length; i++ ) {
+  for ( int i = 0; i < NUM_ENEMIES; i++ ) {
     enemyImages[i] = loadImage("enemy" + (i + 1) + ".png");
+    enemyList.add("ImpendingDoom$Enemy" + (i + 1));
   }
 
-  for ( int i = 0; i < towerImages.length; i++ ) {
+  for ( int i = 0; i < NUM_TOWERS; i++ ) {
     towerImages[i] = loadImage("tower" + (i + 1) + ".png");
+    towerList.add("ImpendingDoom$Tower" + (i + 1));
   }
 
   // enemyImages[1] = loadImage("chicken.png");
@@ -84,7 +98,10 @@ void generatePath() {
 void generateLevel() {
   for ( int i = 0; i < level * random(level / 5, level * 2); i++ ) {
     // FIXME: Find a way to add different enemies based on level.
-    dqueue.add(new Enemy1(INITIAL_SPEED / level, path));
+    // currently picks a random one
+    // have a value for each enemy and a max value per level?
+    String className = enemyList.get(prng.nextInt(enemyList.size()));
+    dqueue.add((Enemy) Utilities.createObject(className, self, delay, path));
   }
 
   levelGenerated = true;
@@ -136,3 +153,4 @@ void mousePressed() {
     return;
   }
 }
+
