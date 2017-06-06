@@ -1,24 +1,107 @@
-2017-06-03  Gabi Newman
+2017-06-06	Jeffrey Lin
+Add devlog as of 9ecd15d
+
+Good night.
+
+Signed-off-by: Jeffrey Lin <jeffrey@icurse.nl>
+
+==========
+
+2017-06-06	Jeffrey Lin
+Add classes for specific buttons
+
+==========
+
+2017-06-06	Jeffrey Lin
+Implement currency and score
+
+Include a button that allows changing of difficulty.
+
+==========
+
+2017-06-05	Jeffrey Lin
+Assign Towers rates at which they attack enemies
+
+Better readability in Quadtree class
+
+==========
+
+2017-06-05	Jeffrey Lin
+Add better entropy to level generation system
+
+==========
+
+2017-06-05	Jeffrey Lin
+Pick random enemies from a master set
+
+Uses reflection to create objects. A bit messy, but quite
+possibly the most interesting thing I've done thus far.
+
+==========
+
+2017-06-05	Jeffrey Lin
+Rename Placable => Placeable
+
+==========
+
+2017-06-05	Gabi Newman
+Static methods and game over
+
+- Add health
+
+==========
+
+2017-06-05	Gabi Newman
+Now with collision detection!
+
+==========
+
+2017-06-04	Jeffrey Lin
+Initialize {Enemy,Tower}{2,3,4} classes
+
+Due to the way Processing works (i.e., by nesting all the classes under
+the driver class), we can have multiple classes in one file without much
+consequence, especially since they're heavily related.
+
+- Rename Enemy{1 => A}; move to Enemy.pde
+
+==========
+
+2017-06-06	Jeffrey Lin
+Update README.md
+
+Fixes #2
+
+==========
+
+2017-06-04	Jeffrey Lin
+Add devlog as of a0898d0
+
+Fixes #3.
+
+==========
+
+2017-06-03	Gabi Newman
 Add formula to check if circle is within square
 
 ==========
 
-2017-05-31  Jeffrey Lin
+2017-05-31	Jeffrey Lin
 Create a path for enemies to walk on
 
 ==========
 
-2017-06-03  Jeffrey Lin
+2017-06-03	Jeffrey Lin
 Miscellany
 
 ==========
 
-2017-05-28  Gabi Newman
+2017-05-28	Gabi Newman
 Quick fix for bug causing infinite loop
 
 ==========
 
-2017-05-28  Jeffrey Lin
+2017-05-28	Jeffrey Lin
 Create Placable class to consolidate methods
 
 - Enemy, Tower, Projectile extend Placable.
@@ -31,7 +114,7 @@ Create Placable class to consolidate methods
 
 ==========
 
-2017-05-27  Gabi Newman
+2017-05-27	Gabi Newman
 Large patch containing small improvements :^)
 
 - Add chicken.png.
@@ -46,7 +129,7 @@ Large patch containing small improvements :^)
 
 ==========
 
-2017-05-27  Jeffrey Lin
+2017-05-27	Jeffrey Lin
 Make enemy background transparent
 
 - Add tower picture
@@ -55,7 +138,7 @@ Make enemy background transparent
 
 ==========
 
-2017-05-27  Gabi Newman
+2017-05-27	Gabi Newman
 Some stuff
 
 - Add setup(), draw() to Board.
@@ -70,41 +153,41 @@ Some stuff
 
 ==========
 
-2017-05-27  Jeffrey Lin
+2017-05-27	Jeffrey Lin
 Use final variables in Button
 
 Move some redundant code to separate functions.
 
 ==========
 
-2017-05-27  Gabi Newman
+2017-05-27	Gabi Newman
 Add functionality to Quadtree and add Board class
 
 ==========
 
-2017-05-27  Gabi Newman
+2017-05-27	Gabi Newman
 Add a title screen
 
 ==========
 
-2017-05-26  Jeffrey Lin
+2017-05-26	Jeffrey Lin
 Add initial Driver file
 
 ==========
 
-2017-06-01  Jeffrey Lin
+2017-06-01	Jeffrey Lin
 Housekeeping
 
 Add PDF of flowchart, UML, plans.
 
 ==========
 
-2017-05-30  Jeffrey Lin
+2017-05-30	Jeffrey Lin
 Use author name instead in devlog
 
 ==========
 
-2017-05-24  Gabi Newman
+2017-05-24	Gabi Newman
 Add Quadtree class
 
 Decreases the time required to find a given Enemy and Tower. This leads
@@ -112,59 +195,59 @@ to faster collision detection.
 
 ==========
 
-2017-05-25  Jeffrey Lin
+2017-05-25	Jeffrey Lin
 Add editorconfig file; update gitignore
 
 ==========
 
-2017-05-24  Jeffrey Lin
+2017-05-24	Jeffrey Lin
 Add accessors, mutators for Projectile, Tower
 
 ==========
 
-2017-05-25  Jeffrey Lin
+2017-05-25	Jeffrey Lin
 Add devlog as of a68bf61
 
 Fixes #1
 
 ==========
 
-2017-05-23  Jeffrey Lin
+2017-05-23	Jeffrey Lin
 Add source for UML, flowchart; add proposal
 
 ==========
 
-2017-05-22  Jeffrey Lin
+2017-05-22	Jeffrey Lin
 Add plan/20170523.txt
 
 ==========
 
-2017-05-22  Jeffrey Lin
+2017-05-22	Jeffrey Lin
 Add tool to update devlog
 
 ==========
 
-2017-05-22  Gabi Newman
+2017-05-22	Gabi Newman
 Add abstract Projectile class
 
 ==========
 
-2017-05-18  Jeffrey Lin
+2017-05-18	Jeffrey Lin
 Add Enemy and Tower abstract classes
 
 ==========
 
-2017-05-18  Gabi Newman
+2017-05-18	Gabi Newman
 Add plan for 5/18
 
 ==========
 
-2017-05-18  Gabi Newman
+2017-05-18	Gabi Newman
 Add devlog
 
 ==========
 
-2017-05-18  Gabi Newman
+2017-05-18	Gabi Newman
 Initial commit
 ==========
 
