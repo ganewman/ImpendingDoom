@@ -1,11 +1,12 @@
 public abstract class Tower extends Placeable {
   float radius = 200;
-  float rate = 1;
+  float rate;
   int strength = 1;
 
-  Tower(float x, float y) {
+  Tower(float x, float y, float rate) {
     X = x;
     Y = y;
+    this.rate = rate;
   }
 
   float getRadius() {
@@ -45,28 +46,28 @@ public abstract class Tower extends Placeable {
 
 class Tower1 extends Tower {
   Tower1(float x, float y) {
-    super(x, y);
+    super(x, y, 0.05);
     img = towerImages[0];
   }
 }
 
 class Tower2 extends Tower {
   Tower2(float x, float y) {
-    super(x, y);
+    super(x, y, 0.15);
     img = towerImages[1];
   }
 }
 
 class Tower3 extends Tower {
   Tower3(float x, float y) {
-    super(x, y);
+    super(x, y, 0.50);
     img = towerImages[2];
   }
 }
 
 class Tower4 extends Tower {
   Tower4(float x, float y) {
-    super(x, y);
+    super(x, y, 1.00);
     img = towerImages[3];
   }
 }

@@ -47,9 +47,9 @@ public class Quadtree {
     float[] enemyCoords = e.getCoords();
     return
       (enemyCoords[0] > X &&
-      enemyCoords[0] < X + SIDELENGTH &&
-      enemyCoords[1] > Y &&
-      enemyCoords[1] < Y + SIDELENGTH);
+       enemyCoords[0] < X + SIDELENGTH &&
+       enemyCoords[1] > Y &&
+       enemyCoords[1] < Y + SIDELENGTH);
   }
 
   float[] getCoords() {
@@ -113,20 +113,26 @@ public class Quadtree {
       Iterator<Enemy> ite = enemies.iterator();
       while (ite.hasNext()) {
         Enemy e = ite.next();
-        if (dist(e.getCoords()[0], e.getCoords()[1], t.getCoords()[0], t.getCoords()[1]) <= t.getRadius()) {
-          e.decrementHealth();
-          if (e.getHealth() <= 0) {
+        float[] eC = e.getCoords();
+        float[] tC = t.getCoords();
+
+        // in radius of tower
+        if (dist(eC[0], eC[1], tC[0], tC[1]) <= t.getRadius()) {
+          // FIXME: Currently vaporizes the enemy regardless of health
+          // more health vs. lower check rate?
+          if ( frameCount % ( difficulty / t.getRate() ) == 0 && e.decrementHealth() <= 0 ) {
             ite.remove();
           }
-          
-          if (e.ALpos > e.path.size() ) {
-            ite.remove();
-            health -= e.getHealth();
-          }
+        }
+
+        // reached end without dying
+        if (e.ALpos >= e.path.size() ) {
+          ite.remove();
+          playerHealth -= e.getHealth();
         }
       }
     }
-    
+
     for (Quadtree q : children){
       if (q != null){
         q.detectCollisions();

@@ -15,8 +15,9 @@ static boolean levelGenerated;
 static final color BG = #5C00C6;
 static final int INITIAL_DELAY = 3000;
 
+static int difficulty = 1; // really should be final but oh well // FIXME: set on titlescreen
 static int level = 1;
-static int health = 10;
+static int playerHealth = 10;
 static int delay = INITIAL_DELAY;
 
 static final int NUM_ENEMIES = 4;
@@ -114,7 +115,7 @@ void generateLevel() {
 }
 
 void play() {
-  if ( health <= 0 ) {
+  if ( playerHealth <= 0 ) {
     System.out.println("GAME OVER JERK");
     exit();
   }

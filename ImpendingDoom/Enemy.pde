@@ -28,8 +28,8 @@ abstract class Enemy extends Placeable {
     return health;
   }
 
-  void decrementHealth() {
-    health--;
+  int decrementHealth() {
+    return health--;
   }
 
   float getSpeed() {
