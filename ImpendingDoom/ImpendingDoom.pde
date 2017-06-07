@@ -118,12 +118,16 @@ void placeTowers() {
 }
 
 void generatePath() {
-  //FIXME: Find a way to programically generate a random path
-  float[] edge1 = new float[] {0, 0};
-  float[] edge2 = new float[] {900, 900};
+  float[] edge1 = Utilities.generateCoordinate(0, 0, width, height);
+  float[] edge2 = Utilities.generateCoordinate(0, 0, width, height);
+
   float dy = (edge2[1] - edge1[1]) / edge2[1];
   float dx = (edge2[0] - edge1[0]) / edge2[0];
 
+
+
+
+  //FIXME: Find a way to programically generate a random path
   for ( int i = 0; i < 900; i++ ) {
     path.add(new Float[] {edge1[0] + (dx * i), edge1[1] + (dy * i)});
   }
