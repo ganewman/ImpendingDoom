@@ -57,9 +57,9 @@ void setup() {
   }
 
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
-  nextLevel = new Button(150, height - 150, 150, 75, "Next Level");
+  nextLevel = new Button(75, height - 37.5, 150, 75, "Next Level");
   difficultyButton = new DifficultyButton(width / 2, height / 3 * 2, 150, 75, "Normal");
-  currentTower = new TowerButton(width - 150, 100, 150, 150, " ");
+  currentTower = new TowerButton(width - 75, 75, 150, 150, " ");
 
 
   // enemyImages[1] = loadImage("chicken.png");
@@ -191,3 +191,4 @@ void mousePressed() {
     levelRunning = true;
   }
 }
+

@@ -67,6 +67,7 @@ class StatefulButton extends Button {
 class DifficultyButton extends StatefulButton {
   DifficultyButton(float xcor, float ycor, float width, float height, String text) {
     super(xcor, ycor, width, height, text);
+    state = 2;
   }
 
   boolean clicked() {
