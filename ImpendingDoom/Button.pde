@@ -76,15 +76,9 @@ class DifficultyButton extends StatefulButton {
       }
 
       switch ( state ) {
-      case 1: 
-        buttonText = "Easy"; 
-        break;
-      case 2: 
-        buttonText = "Normal"; 
-        break;
-      case 3: 
-        buttonText = "Hard"; 
-        break;
+        case 1: buttonText = "Easy";   break;
+        case 2: buttonText = "Normal"; break;
+        case 3: buttonText = "Hard";   break;
       }
       return true;
     }

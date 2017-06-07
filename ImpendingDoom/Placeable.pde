@@ -11,4 +11,3 @@ abstract class Placeable {
     return new float[] {X, Y};
   }
 }
-

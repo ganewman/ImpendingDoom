@@ -24,4 +24,3 @@ static final class Utilities {
     }
   }
 }
-
