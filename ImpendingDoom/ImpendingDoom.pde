@@ -74,18 +74,31 @@ void draw() {
     return;
   }
 
-  if ( gameStarted ) {
-    play();
-  } else {
-    fill(#809B85);
-    textSize(50);
+  fill(#809B85);
+  background(BG);
 
-    text("Tower Defense", width / 2, height / 2 - 120);
-    textSize(20);
-    text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
-    playButton.draw();
-    difficultyButton.draw();
+  if ( gameStarted ) {
+    if ( playerHealth > 0 ) {
+      play();
+    } else {
+      textSize(50);
+      text("GAME OVER", width / 2, height / 2 - 120);
+      textSize(20);
+      text(String.format("You died on level %s with a final score of %s.", level, score),
+          width / 2,
+          height / 2 - 70);
+    }
+
+    return;
   }
+
+  textSize(50);
+  text("Tower Defense", width / 2, height / 2 - 120);
+  textSize(20);
+  text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
+  playButton.draw();
+  difficultyButton.draw();
+  return;
 }
 
 void placeTowers() {
@@ -130,11 +143,6 @@ void generateLevel() {
 }
 
 void play() {
-  if ( playerHealth <= 0 ) {
-    System.out.println("GAME OVER JERK");
-    exit();
-  }
-
   currentTower.draw();
   board.draw();
 
@@ -151,6 +159,7 @@ void play() {
     if ( board.isEmpty() ) {
       levelRunning = false;
       levelGenerated = false;
+      level++;
       return;
     }
 
