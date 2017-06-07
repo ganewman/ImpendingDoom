@@ -200,16 +200,20 @@ void mousePressed() {
     }
   }
 
-  if ( ! gameStarted ) {
-    difficultyButton.clicked();
-  } else {
-    if ( currentTower.clicked() ) {
-      return;
-    }
-    placeTowers();
-  }
-
   if ( ! levelRunning && nextLevel.clicked() ) {
     levelRunning = true;
+    return;
   }
+
+  if ( ! gameStarted ) {
+    difficultyButton.clicked();
+    return;
+  }
+
+  if ( currentTower.clicked() ) {
+    return;
+  }
+
+  placeTowers();
 }
+

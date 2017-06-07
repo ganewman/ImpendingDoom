@@ -123,7 +123,7 @@ public class Quadtree {
           if ( frameCount % ( difficulty / t.getRate() ) == 0 && e.decrementHealth() <= 0 ) {
             ite.remove();
             score += (difficulty * e.INITIAL_HEALTH);
-            currency += (e.INITIAL_HEALTH / difficulty);
+            currency += ceil(e.INITIAL_HEALTH * difficulty / 2);
           }
         }
 
