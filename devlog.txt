@@ -1,7 +1,52 @@
-2017-06-06	Jeffrey Lin
-Add devlog as of 9ecd15d
+2017-06-07	Jeffrey Lin
+Fix bug where Tower placed while pressing button
 
-Good night.
+==========
+
+2017-06-06	Jeffrey Lin
+Display statistics on the side
+
+==========
+
+2017-06-06	Gabi Newman
+Implement a game over screen
+
+==========
+
+2017-06-06	Jeffrey Lin
+Push buttons to the corner
+
+Fix a bug where state was incorrectly initialized.
+
+==========
+
+2017-06-06	Jeffrey Lin
+Prevent creation of too many redundant objects
+
+Have enemyList and towerList store Enemy and Tower, respectively. This
+requires the buttons to be initialized after lists are populated.
+
+Add Utilities.getName() to get the full name of an Object.
+
+==========
+
+2017-06-06	Gabi Newman
+Fix tower button
+
+==========
+
+2017-06-06	Gabi Newman
+Fix radius drawing mechanism for towers
+
+==========
+
+2017-06-06	Gabi Newman
+Fix bugs
+
+==========
+
+2017-06-06	Jeffrey Lin
+Add devlog as of f246383
 
 Signed-off-by: Jeffrey Lin <jeffrey@icurse.nl>
 
