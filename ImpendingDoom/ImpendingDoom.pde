@@ -47,7 +47,7 @@ void setup() {
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
   nextLevel = new Button(150, height - 150, 150, 75, "Next Level");
   difficultyButton = new DifficultyButton(width / 2, height / 3 * 2, 150, 75, "Normal");
-  currentTower = new TowerButton(width - 75, 0, 150, 150, " ");
+  currentTower = new TowerButton(width - 150, 100, 150, 150, " ");
 
   for ( int i = 0; i < NUM_ENEMIES; i++ ) {
     enemyImages[i] = loadImage("enemy" + (i + 1) + ".png");
@@ -140,6 +140,7 @@ void play() {
     text("Please select where to place tower", width/2, 40);
 
     nextLevel.draw();
+    currentTower.draw();
     return;
   }
 

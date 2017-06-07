@@ -18,9 +18,10 @@ public abstract class Tower extends Placeable {
 
   @Override void draw() {
     // XXX: debug purposes
-    sketchApplet.image(img, X - (img.width / 2), Y - (img.height / 2));
+    sketchApplet.image(img, X, Y);
     sketchApplet.fill(#5C00C6, 70);
     sketchApplet.ellipse(X, Y, this.getRadius(), this.getRadius());
+    sketchApplet.fill(#5C00C6);
   }
 
   void setRadius(float radius) {

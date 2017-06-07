@@ -103,6 +103,7 @@ class TowerButton extends StatefulButton {
 
   @Override void draw() {
     rectMode(CENTER);
+    imageMode(CENTER);
     if ( inRect() ) {
       fill(#5C00C6);
       rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
@@ -112,7 +113,9 @@ class TowerButton extends StatefulButton {
       rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
       fill(#5C00C6);
     }
-    image(towerImages[state - 1], X, Y, 150, 150);
-    text(X, Y, ((Tower) (Utilities.createObject(towerList.get(state - 1), self, -1, -1))).getCost());
+
+    image(towerImages[state - 1], X, Y);
+    text(((Tower) (Utilities.createObject(towerList.get(state - 1), self, -1, -1))).getCost(), X, Y);
   }
 }
+
