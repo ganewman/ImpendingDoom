@@ -23,4 +23,8 @@ static final class Utilities {
       return null;
     }
   }
+
+  private static String getName(Object obj) {
+    return obj.getClass().getName();
+  }
 }

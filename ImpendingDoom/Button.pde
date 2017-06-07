@@ -87,6 +87,8 @@ class DifficultyButton extends StatefulButton {
 }
 
 class TowerButton extends StatefulButton {
+  Tower current = towerList.get(0);
+
   TowerButton(float xcor, float ycor, float width, float height, String text) {
     super(xcor, ycor, width, height, text);
   }
@@ -96,6 +98,7 @@ class TowerButton extends StatefulButton {
       if ( ++state > NUM_TOWERS ) {
         state = 1;
       }
+      current = towerList.get(state - 1);
       return true;
     }
     return false;
@@ -114,8 +117,8 @@ class TowerButton extends StatefulButton {
       fill(#5C00C6);
     }
 
-    image(towerImages[state - 1], X, Y);
-    text(((Tower) (Utilities.createObject(towerList.get(state - 1), self, -1, -1))).getCost(), X, Y);
+    image(current.img, X, Y);
+    text(current.getCost(), X, Y);
   }
 }
 

@@ -30,8 +30,8 @@ static final int NUM_ENEMIES = 4;
 static final int NUM_TOWERS = 4;
 static final PImage[] enemyImages = new PImage[NUM_ENEMIES];
 static final PImage[] towerImages = new PImage[NUM_TOWERS];
-static final List<String> enemyList = new ArrayList<String>();
-static final List<String> towerList = new ArrayList<String>();
+static final List<Enemy> enemyList = new ArrayList<Enemy>();
+static final List<Tower> towerList = new ArrayList<Tower>();
 
 static final LinkedBlockingQueue<Enemy> dqueue = new LinkedBlockingQueue<Enemy>();
 static final ArrayList<Float[]> path = new ArrayList<Float[]>();
@@ -44,20 +44,23 @@ void setup() {
   noStroke();
   textAlign(CENTER, CENTER);
 
+  for ( int i = 0; i < NUM_ENEMIES; i++ ) {
+    enemyImages[i] = loadImage("enemy" + (i + 1) + ".png");
+    enemyList.add(
+        (Enemy) Utilities.createObject("ImpendingDoom$Enemy" + (i + 1), self, delay, path));
+  }
+
+  for ( int i = 0; i < NUM_TOWERS; i++ ) {
+    towerImages[i] = loadImage("tower" + (i + 1) + ".png");
+    towerList.add(
+        (Tower) Utilities.createObject("ImpendingDoom$Tower" + (i + 1), self, -1, -1));
+  }
+
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
   nextLevel = new Button(150, height - 150, 150, 75, "Next Level");
   difficultyButton = new DifficultyButton(width / 2, height / 3 * 2, 150, 75, "Normal");
   currentTower = new TowerButton(width - 150, 100, 150, 150, " ");
 
-  for ( int i = 0; i < NUM_ENEMIES; i++ ) {
-    enemyImages[i] = loadImage("enemy" + (i + 1) + ".png");
-    enemyList.add("ImpendingDoom$Enemy" + (i + 1));
-  }
-
-  for ( int i = 0; i < NUM_TOWERS; i++ ) {
-    towerImages[i] = loadImage("tower" + (i + 1) + ".png");
-    towerList.add("ImpendingDoom$Tower" + (i + 1));
-  }
 
   // enemyImages[1] = loadImage("chicken.png");
   generatePath();
@@ -87,7 +90,7 @@ void draw() {
 
 void placeTowers() {
   Tower t = (Tower) Utilities.createObject(
-      "ImpendingDoom$Tower" + currentTower.state, self, (float) mouseX, (float) mouseY);
+      Utilities.getName(currentTower.current), self, (float) mouseX, (float) mouseY);
   if ( currency - t.cost < 0 ) {
     return;
   } else {
@@ -116,7 +119,7 @@ void generateLevel() {
   int threshold = level + ceil(random(level / 2, level * 10));
 
   while ( threshold > 0 ) {
-    String className = enemyList.get(prng.nextInt(enemyList.size()));
+    String className = Utilities.getName(enemyList.get(prng.nextInt(enemyList.size())));
     Enemy tmp = (Enemy) Utilities.createObject(className, self, delay, path);
 
     dqueue.add(tmp);
