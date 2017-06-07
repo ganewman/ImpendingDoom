@@ -1,5 +1,6 @@
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.Random;
+import java.util.Hashtable;
 
 static PApplet sketchApplet;
 static final ImpendingDoom self = new ImpendingDoom();
@@ -36,6 +37,8 @@ static final List<Tower> towerList = new ArrayList<Tower>();
 static final LinkedBlockingQueue<Enemy> dqueue = new LinkedBlockingQueue<Enemy>();
 static final ArrayList<Float[]> path = new ArrayList<Float[]>();
 
+static final Hashtable<String, PFont> fonts = new Hashtable<String, PFont>();
+
 void setup() {
   sketchApplet = this;
 
@@ -66,6 +69,9 @@ void setup() {
   generatePath();
   board = new Board(path);
   board.boardMap = new Quadtree(0, 0, width);
+
+  fonts.put("monospace", loadFont("LiberationMono-48.vlw"));
+  fonts.put("variable", loadFont("AgencyFB-Reg-48.vlw"));
 }
 
 void draw() {
@@ -98,7 +104,6 @@ void draw() {
   text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
   playButton.draw();
   difficultyButton.draw();
-  return;
 }
 
 void placeTowers() {
@@ -145,6 +150,14 @@ void generateLevel() {
 void play() {
   currentTower.draw();
   board.draw();
+
+  textFont(fonts.get("monospace"));
+  textSize(20);
+  textAlign(LEFT);
+  text(String.format("Level: %10d\nCurrency: %7d\nHealth: %9d\nScore:%11d",
+        level, currency, playerHealth, score), 5, 25);
+  textAlign(CENTER);
+  textFont(fonts.get("variable"));
 
   if ( ! levelRunning ) {
     textSize(20);
@@ -200,4 +213,3 @@ void mousePressed() {
     levelRunning = true;
   }
 }
-

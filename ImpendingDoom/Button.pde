@@ -2,7 +2,6 @@ import processing.core.PApplet;
 
 public class Button {
   boolean toggled;
-  PFont buttonFont;
   String buttonText;
   final float X;
   final float Y;
@@ -34,11 +33,10 @@ public class Button {
   }
 
   void setup() {
-    buttonFont = loadFont("AgencyFB-Reg-48.vlw");
-    textFont(buttonFont);
   }
 
   void draw() {
+    textFont(fonts.get("variable"));
     rectMode(CENTER);
     if ( inRect() ) {
       fill(#5C00C6);
