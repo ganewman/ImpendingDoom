@@ -27,10 +27,8 @@ static int level = 1;
 static int playerHealth = 10;
 static int delay = INITIAL_DELAY;
 
-static final int NUM_ENEMIES = 4;
-static final int NUM_TOWERS = 4;
-static final PImage[] enemyImages = new PImage[NUM_ENEMIES];
-static final PImage[] towerImages = new PImage[NUM_TOWERS];
+static final List<PImage> enemyImages = new ArrayList<PImage>();
+static final List<PImage> towerImages = new ArrayList<PImage>();
 static final List<Enemy> enemyList = new ArrayList<Enemy>();
 static final List<Tower> towerList = new ArrayList<Tower>();
 
@@ -47,16 +45,31 @@ void setup() {
   noStroke();
   textAlign(CENTER, CENTER);
 
-  for ( int i = 0; i < NUM_ENEMIES; i++ ) {
-    enemyImages[i] = loadImage("enemy" + (i + 1) + ".png");
-    enemyList.add(
-        (Enemy) Utilities.createObject("ImpendingDoom$Enemy" + (i + 1), self, delay, path));
+  // initialize master image and object lists
+  // generic exception because we just want to load as many as possible
+  // Processing does not throw an Exception when the image doesn't exist
+  for ( int i = 1; ; i++ ) {
+    try {
+      PImage tmp = loadImage("enemy" + i + ".png");
+      if ( tmp == null ) { break; }
+
+      enemyImages.add(tmp);
+      enemyList.add((Enemy) Utilities.createObject("ImpendingDoom$Enemy" + i, self, delay, path));
+    } catch ( Exception e ) {
+      break;
+    }
   }
 
-  for ( int i = 0; i < NUM_TOWERS; i++ ) {
-    towerImages[i] = loadImage("tower" + (i + 1) + ".png");
-    towerList.add(
-        (Tower) Utilities.createObject("ImpendingDoom$Tower" + (i + 1), self, -1, -1));
+  for ( int i = 1; ; i++ ) {
+    try {
+      PImage tmp = loadImage("tower" + i + ".png");
+      if ( tmp == null ) { break; }
+
+      towerImages.add(tmp);
+      towerList.add((Tower) Utilities.createObject("ImpendingDoom$Tower" + i, self, -1, -1));
+    } catch ( Exception e ) {
+      break;
+    }
   }
 
   playButton = new Button(width / 2, height / 2, 150, 75, "Play!");
@@ -65,7 +78,6 @@ void setup() {
   currentTower = new TowerButton(width - 75, 75, 150, 150, " ");
 
 
-  // enemyImages[1] = loadImage("chicken.png");
   generatePath();
   board = new Board(path);
   board.boardMap = new Quadtree(0, 0, width);
@@ -200,7 +212,7 @@ void mousePressed() {
     }
   }
 
-  if ( ! levelRunning && nextLevel.clicked() ) {
+  if ( ( ! levelRunning ) && nextLevel.clicked() ) {
     levelRunning = true;
     return;
   }

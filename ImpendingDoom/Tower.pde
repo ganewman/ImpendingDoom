@@ -10,6 +10,9 @@ public abstract class Tower extends Placeable {
     this.radius = radius;
     this.rate = rate;
     this.cost = cost;
+
+    // should always be the trailing number - 1 assuming naming conventions are followed
+    img = towerImages.get(Integer.parseInt(Utilities.getName(this).replaceAll("\\D+", "")) - 1);
   }
 
   float getRadius() {
@@ -56,27 +59,23 @@ public abstract class Tower extends Placeable {
 class Tower1 extends Tower {
   Tower1(float x, float y) {
     super(x, y, 100, 0.05, 100);
-    img = towerImages[0];
   }
 }
 
 class Tower2 extends Tower {
   Tower2(float x, float y) {
     super(x, y, 150, 0.15, 200);
-    img = towerImages[1];
   }
 }
 
 class Tower3 extends Tower {
   Tower3(float x, float y) {
     super(x, y, 250, 0.50, 400);
-    img = towerImages[2];
   }
 }
 
 class Tower4 extends Tower {
   Tower4(float x, float y) {
     super(x, y, 400, 1.00, 800);
-    img = towerImages[3];
   }
 }

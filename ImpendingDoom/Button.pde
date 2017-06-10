@@ -94,7 +94,7 @@ class TowerButton extends StatefulButton {
 
   boolean clicked() {
     if ( mousePressed && inRect() ) {
-      if ( ++state > NUM_TOWERS ) {
+      if ( ++state > towerList.size() ) {
         state = 1;
       }
       current = towerList.get(state - 1);
