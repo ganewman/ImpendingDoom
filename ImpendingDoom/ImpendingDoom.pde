@@ -22,7 +22,7 @@ static int score;
 static final color BG = #5C00C6;
 static final int INITIAL_DELAY = 3000;
 
-static int difficulty = 2;
+static int difficulty;
 static int level = 1;
 static int playerHealth = 10;
 static int delay = INITIAL_DELAY;
@@ -203,7 +203,7 @@ void mousePressed() {
   if ( playButton.clicked() ) {
     gameStarted = true;
     levelRunning = false;
-    difficulty = difficultyButton.state;
+    difficulty = difficultyButton.currentState;
 
     switch ( difficulty ) {
       case 1: currency = 500; playerHealth = 100; return;

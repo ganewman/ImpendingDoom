@@ -54,27 +54,34 @@ public class Button {
 /* Yes, this violates the "one class per file" policy too.
  */
 
-class StatefulButton extends Button {
-  int state = 1;
+abstract class StatefulButton extends Button {
+  int maxState;
+  int minState;
+  int currentState;
 
   StatefulButton(float xcor, float ycor, float width, float height, String text) {
     super(xcor, ycor, width, height, text);
+  }
+
+  int cycle() {
+    if ( ++currentState > maxState ) {
+      currentState = minState;
+    }
+    return currentState;
   }
 }
 
 class DifficultyButton extends StatefulButton {
   DifficultyButton(float xcor, float ycor, float width, float height, String text) {
     super(xcor, ycor, width, height, text);
-    state = 2;
+    maxState = 3;
+    minState = 1;
+    currentState = 2;
   }
 
   boolean clicked() {
     if ( mousePressed && inRect() ) {
-      if ( ++state > 3 ) {
-        state = 1;
-      }
-
-      switch ( state ) {
+      switch ( cycle() ) {
         case 1: buttonText = "Easy";   break;
         case 2: buttonText = "Normal"; break;
         case 3: buttonText = "Hard";   break;
@@ -90,14 +97,12 @@ class TowerButton extends StatefulButton {
 
   TowerButton(float xcor, float ycor, float width, float height, String text) {
     super(xcor, ycor, width, height, text);
+    maxState = towerList.size() - 1;
   }
 
   boolean clicked() {
     if ( mousePressed && inRect() ) {
-      if ( ++state > towerList.size() ) {
-        state = 1;
-      }
-      current = towerList.get(state - 1);
+      current = towerList.get(cycle());
       return true;
     }
     return false;
