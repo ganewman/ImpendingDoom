@@ -37,13 +37,18 @@ static final ArrayList<Float[]> path = new ArrayList<Float[]>();
 
 static final Hashtable<String, PFont> fonts = new Hashtable<String, PFont>();
 
-void setup() {
-  sketchApplet = this;
-
-  size(900, 900);
+void loadDefaults() {
   background(BG);
   noStroke();
   textAlign(CENTER, CENTER);
+}
+
+void setup() {
+  sketchApplet = this;
+  size(900, 900);
+
+  loadDefaults();
+
 
   // initialize master image and object lists
   // generic exception because we just want to load as many as possible
@@ -54,7 +59,7 @@ void setup() {
       if ( tmp == null ) { break; }
 
       enemyImages.add(tmp);
-      enemyList.add((Enemy) Utilities.createObject("ImpendingDoom$Enemy" + i, self, delay, path));
+      enemyList.add((Enemy) Utilities.createObject("ImpendingDoom$Enemy" + i, self, delay));
     } catch ( Exception e ) {
       break;
     }
@@ -79,7 +84,7 @@ void setup() {
 
 
   generatePath();
-  board = new Board(path);
+  board = new Board();
   board.boardMap = new Quadtree(0, 0, width);
 
   fonts.put("monospace", loadFont("LiberationMono-48.vlw"));
@@ -150,7 +155,7 @@ void generateLevel() {
 
   while ( threshold > 0 ) {
     String className = Utilities.getName(enemyList.get(prng.nextInt(enemyList.size())));
-    Enemy tmp = (Enemy) Utilities.createObject(className, self, delay, path);
+    Enemy tmp = (Enemy) Utilities.createObject(className, self, delay);
 
     dqueue.add(tmp);
     threshold -= tmp.getHealth();

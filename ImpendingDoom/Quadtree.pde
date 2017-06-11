@@ -128,7 +128,7 @@ public class Quadtree {
         }
 
         // reached end without dying
-        if (e.ALpos >= e.path.size() ) {
+        if (e.ALpos >= path.size() ) {
           ite.remove();
           playerHealth -= e.getHealth();
         }

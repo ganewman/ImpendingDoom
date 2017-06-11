@@ -5,10 +5,8 @@ public class Board {
   Quadtree boardMap;
   List<Enemy> enemiesOnBoard = new ArrayList<Enemy>();
   final List<Tower> towers = new ArrayList<Tower>();
-  List<Float[]> path;
 
-  public Board(ArrayList<Float[]> path) {
-    this.path = path;
+  public Board() {
   }
 
   void draw() {
@@ -55,9 +53,5 @@ public class Board {
   boolean isEmpty() {
     return enemiesOnBoard.isEmpty();
   }
-
-
-  void setPath(List<Float[]> l) {
-    path = l;
-  }
 }
+
