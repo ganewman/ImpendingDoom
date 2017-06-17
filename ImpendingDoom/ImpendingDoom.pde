@@ -17,7 +17,6 @@ static boolean levelGenerated;
 static int currency;
 static int score;
 
-static final color BG = #5C00C6;
 static final int INITIAL_DELAY = 3000;
 
 static int difficulty;
@@ -34,6 +33,7 @@ static final LinkedBlockingQueue<Enemy> dqueue = new LinkedBlockingQueue<Enemy>(
 static final ArrayList<Float[]> path = new ArrayList<Float[]>();
 
 static final Hashtable<String, PFont> fonts = new Hashtable<String, PFont>();
+static final Hashtable<String, Integer> colors = new Hashtable<String, Integer>();
 
 void setup() {
   size(900, 900);
@@ -73,6 +73,13 @@ void setup() {
 
   fonts.put("monospace", loadFont("LiberationMono-48.vlw"));
   fonts.put("variable", loadFont("AgencyFB-Reg-48.vlw"));
+
+  colors.put("background", color(#5C00C6));
+  colors.put("gray", color(#809B85));
+  colors.put("lime", color(#BFF7B4));
+  colors.put("tan", color(#EDBA37));
+
+  background(colors.get("background"));
 }
 
 void loadDefaults() {
@@ -90,8 +97,8 @@ void draw() {
     return;
   }
 
-  fill(#809B85);
-  background(BG);
+  fill(colors.get("gray"));
+  background(colors.get("background"));
 
   if ( gameStarted ) {
     if ( playerHealth > 0 ) {

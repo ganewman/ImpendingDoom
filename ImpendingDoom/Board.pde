@@ -10,10 +10,10 @@ public class Board {
   }
 
   void draw() {
-    background(#BFF7B4);
+    background(colors.get("lime"));
     update();
 
-    stroke(#EDBA37);
+    stroke(colors.get("tan"));
     strokeWeight(20);
     for ( int i = 0; i < path.size() - 1; i++ ) {
       line(path.get(i)[0], path.get(i)[1], path.get(i + 1)[0], path.get(i + 1)[1]);

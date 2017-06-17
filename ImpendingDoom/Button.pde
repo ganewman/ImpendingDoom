@@ -36,13 +36,13 @@ public class Button {
     textFont(fonts.get("variable"));
     rectMode(CENTER);
     if ( inRect() ) {
-      fill(#5C00C6);
+      fill(colors.get("background"));
       rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
-      fill(#809B85);
+      fill(colors.get("gray"));
     } else {
-      fill(#809B85);
+      fill(colors.get("gray"));
       rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
-      fill(#5C00C6);
+      fill(colors.get("background"));
     }
     text(buttonText, X, Y);
   }
