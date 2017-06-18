@@ -4,10 +4,11 @@ abstract class Placeable {
   PImage img;
 
   void draw() {
-    sketchApplet.image(img, X - (img.width / 2), Y - (img.height / 2));
+    image(img, X - (img.width / 2), Y - (img.height / 2));
   }
 
   float[] getCoords() {
     return new float[] {X, Y};
   }
 }
+

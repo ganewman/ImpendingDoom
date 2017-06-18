@@ -32,9 +32,6 @@ public class Button {
     return false;
   }
 
-  void setup() {
-  }
-
   void draw() {
     textFont(fonts.get("variable"));
     rectMode(CENTER);
@@ -109,19 +106,8 @@ class TowerButton extends StatefulButton {
   }
 
   @Override void draw() {
-    rectMode(CENTER);
-    imageMode(CENTER);
-    if ( inRect() ) {
-      fill(#5C00C6);
-      rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
-      fill(#809B85);
-    } else {
-      fill(#809B85);
-      rect(X, Y, BUTTONWIDTH, BUTTONHEIGHT);
-      fill(#5C00C6);
-    }
-
-    image(current.img, X, Y);
+    super.draw();
+    image(current.img, X - current.img.width / 2, Y - current.img.height / 2);
     text(current.getCost(), X, Y);
   }
 }

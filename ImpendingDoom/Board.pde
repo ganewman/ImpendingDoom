@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
-  Quadtree boardMap;
+  final Quadtree boardMap = new Quadtree(0, 0, width);
   List<Enemy> enemiesOnBoard = new ArrayList<Enemy>();
   final List<Tower> towers = new ArrayList<Tower>();
 

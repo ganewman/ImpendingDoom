@@ -2,11 +2,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.Random;
 import java.util.Hashtable;
 
-static PApplet sketchApplet;
-static final ImpendingDoom self = new ImpendingDoom();
 static final Random prng = new Random();
+Board board = new Board();
 
-static Board board;
 static Button playButton;
 static Button nextLevel;
 static DifficultyButton difficultyButton;
@@ -37,18 +35,9 @@ static final ArrayList<Float[]> path = new ArrayList<Float[]>();
 
 static final Hashtable<String, PFont> fonts = new Hashtable<String, PFont>();
 
-void loadDefaults() {
-  background(BG);
-  noStroke();
-  textAlign(CENTER, CENTER);
-}
-
 void setup() {
-  sketchApplet = this;
   size(900, 900);
-
   loadDefaults();
-
 
   // initialize master image and object lists
   // generic exception because we just want to load as many as possible
@@ -59,7 +48,7 @@ void setup() {
       if ( tmp == null ) { break; }
 
       enemyImages.add(tmp);
-      enemyList.add((Enemy) Utilities.createObject("ImpendingDoom$Enemy" + i, self, delay));
+      enemyList.add((Enemy) Utilities.createObject("ImpendingDoom$Enemy" + i, this, delay));
     } catch ( Exception e ) {
       break;
     }
@@ -71,7 +60,7 @@ void setup() {
       if ( tmp == null ) { break; }
 
       towerImages.add(tmp);
-      towerList.add((Tower) Utilities.createObject("ImpendingDoom$Tower" + i, self, -1, -1));
+      towerList.add((Tower) Utilities.createObject("ImpendingDoom$Tower" + i, this, -1, -1));
     } catch ( Exception e ) {
       break;
     }
@@ -82,17 +71,21 @@ void setup() {
   difficultyButton = new DifficultyButton(width / 2, height / 3 * 2, 150, 75, "Normal");
   currentTower = new TowerButton(width - 75, 75, 150, 150, " ");
 
-
-  generatePath();
-  board = new Board();
-  board.boardMap = new Quadtree(0, 0, width);
-
   fonts.put("monospace", loadFont("LiberationMono-48.vlw"));
   fonts.put("variable", loadFont("AgencyFB-Reg-48.vlw"));
 }
 
+void loadDefaults() {
+  strokeWeight(20);
+  strokeJoin(ROUND);
+  noStroke();
+  textAlign(CENTER, CENTER);
+  textFont(fonts.get("variable"));
+}
+
 void draw() {
   if ( ! levelGenerated ) {
+    generatePath();
     generateLevel();
     return;
   }
@@ -125,7 +118,7 @@ void draw() {
 
 void placeTowers() {
   Tower t = (Tower) Utilities.createObject(
-      Utilities.getName(currentTower.current), self, (float) mouseX, (float) mouseY);
+      Utilities.getName(currentTower.current), this, (float) mouseX, (float) mouseY);
   if ( currency - t.cost < 0 ) {
     return;
   } else {
@@ -155,7 +148,7 @@ void generateLevel() {
 
   while ( threshold > 0 ) {
     String className = Utilities.getName(enemyList.get(prng.nextInt(enemyList.size())));
-    Enemy tmp = (Enemy) Utilities.createObject(className, self, delay);
+    Enemy tmp = (Enemy) Utilities.createObject(className, this, delay);
 
     dqueue.add(tmp);
     threshold -= tmp.getHealth();
