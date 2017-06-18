@@ -1,8 +1,7 @@
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.Hashtable;
 
-static final Random prng = new Random();
 Board board = new Board();
 
 static Button playButton;
@@ -124,13 +123,17 @@ void draw() {
 }
 
 void placeTowers() {
-  Tower t = (Tower) Utilities.createObject(
-      Utilities.getName(currentTower.current), this, (float) mouseX, (float) mouseY);
-  if ( currency - t.cost < 0 ) {
-    return;
-  } else {
-    board.addTower(t);
-    currency -= t.cost;
+  try {
+    Tower t = (Tower) Utilities.createObject(
+        Utilities.getName(currentTower.current), this, (float) mouseX, (float) mouseY);
+    if ( currency - t.cost < 0 ) {
+      return;
+    } else {
+      board.addTower(t);
+      currency -= t.cost;
+    }
+  } catch ( Exception e ) {
+    e.printStackTrace();
   }
 }
 
@@ -154,11 +157,16 @@ void generateLevel() {
   int threshold = level + ceil(random(level / 2, level * 10));
 
   while ( threshold > 0 ) {
-    String className = Utilities.getName(enemyList.get(prng.nextInt(enemyList.size())));
-    Enemy tmp = (Enemy) Utilities.createObject(className, this, delay);
+    String className = Utilities.getName(enemyList.get(ThreadLocalRandom.current().nextInt(enemyList.size())));
 
-    dqueue.add(tmp);
-    threshold -= tmp.getHealth();
+    try {
+      Enemy tmp = (Enemy) Utilities.createObject(className, this, delay);
+
+      dqueue.add(tmp);
+      threshold -= tmp.getHealth();
+    } catch ( Exception e ) {
+      e.printStackTrace();
+    }
   }
 
   levelGenerated = true;

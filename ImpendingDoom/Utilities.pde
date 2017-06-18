@@ -1,30 +1,26 @@
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 
 static final class Utilities {
   private Utilities() { }
 
-  private static Object createObject(String className) {
-    try {
-      Class<?> c = Class.forName(className);
-      return c.newInstance();
-    } catch ( Exception e ) {
-      e.printStackTrace();
-      return null;
-    }
+  static Object createObject(String className) throws Exception {
+    Class<?> c = Class.forName(className);
+    return c.newInstance();
   }
 
-  private static Object createObject(String className, Object... args) {
-    try {
-      Class<?> c = Class.forName(className);
-      Constructor<?> ctor = c.getDeclaredConstructors()[0];
-      return ctor.newInstance(args);
-    } catch ( Exception e ) {
-      e.printStackTrace();
-      return null;
-    }
+  static Object createObject(String className, Object... args) throws Exception {
+    Class<?> c = Class.forName(className);
+    Constructor<?> ctor = c.getDeclaredConstructors()[0];
+    return ctor.newInstance(args);
   }
 
-  private static String getName(Object obj) {
+  static String getName(Object obj) {
     return obj.getClass().getName();
+  }
+
+  static Object getObject(Object clazz, String variableName) throws Exception {
+    Field f = clazz.getClass().getDeclaredField(variableName);
+    return f.get(clazz);
   }
 }
