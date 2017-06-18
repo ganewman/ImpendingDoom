@@ -1,6 +1,7 @@
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.Hashtable;
+import java.util.Queue;
 
 Board board = new Board();
 
@@ -28,17 +29,19 @@ static final List<PImage> towerImages = new ArrayList<PImage>();
 static final List<Enemy> enemyList = new ArrayList<Enemy>();
 static final List<Tower> towerList = new ArrayList<Tower>();
 
-static final LinkedBlockingQueue<Enemy> dqueue = new LinkedBlockingQueue<Enemy>();
+static final Queue<Enemy> dqueue = new LinkedBlockingQueue<Enemy>();
 static final ArrayList<Float[]> path = new ArrayList<Float[]>();
 
 static final Hashtable<String, PFont> fonts = new Hashtable<String, PFont>();
 static final Hashtable<String, Integer> colors = new Hashtable<String, Integer>();
 
+/**
+ * Initialize the sketch. Populates reference lists, image lists, font lists, and color lists.
+ * Initializes buttons.
+ */
 void setup() {
   size(900, 900);
-  loadDefaults();
 
-  // initialize master image and object lists
   // generic exception because we just want to load as many as possible
   // Processing does not throw an Exception when the image doesn't exist
   for ( int i = 1; ; i++ ) {
@@ -78,7 +81,7 @@ void setup() {
   colors.put("lime", color(#BFF7B4));
   colors.put("tan", color(#EDBA37));
 
-  background(colors.get("background"));
+  loadDefaults();
 }
 
 void loadDefaults() {
@@ -89,6 +92,26 @@ void loadDefaults() {
   textFont(fonts.get("variable"));
 }
 
+void welcomeScreen() {
+  background(colors.get("background"));
+  fill(colors.get("gray"));
+  textSize(50);
+  text("Tower Defense", width / 2, height / 2 - 120);
+  textSize(20);
+  text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
+  playButton.draw();
+  difficultyButton.draw();
+}
+
+void deadScreen() {
+  textSize(50);
+  text("GAME OVER", width / 2, height / 2 - 120);
+  textSize(20);
+  text(String.format("You died on level %s with a final score of %s.", level, score),
+      width / 2,
+      height / 2 - 70);
+}
+
 void draw() {
   if ( ! levelGenerated ) {
     generatePath();
@@ -96,30 +119,18 @@ void draw() {
     return;
   }
 
-  fill(colors.get("gray"));
-  background(colors.get("background"));
-
   if ( gameStarted ) {
     if ( playerHealth > 0 ) {
       play();
+      return;
     } else {
-      textSize(50);
-      text("GAME OVER", width / 2, height / 2 - 120);
-      textSize(20);
-      text(String.format("You died on level %s with a final score of %s.", level, score),
-          width / 2,
-          height / 2 - 70);
+      deadScreen();
+      noLoop();
+      return;
     }
-
-    return;
+  } else {
+    welcomeScreen();
   }
-
-  textSize(50);
-  text("Tower Defense", width / 2, height / 2 - 120);
-  textSize(20);
-  text("Gabi Newman + Jeffrey Lin", width / 2, height / 2 - 70);
-  playButton.draw();
-  difficultyButton.draw();
 }
 
 void placeTowers() {
@@ -181,8 +192,7 @@ void play() {
   textAlign(LEFT);
   text(String.format("Level: %10d\nCurrency: %7d\nHealth: %9d\nScore:%11d",
         level, currency, playerHealth, score), 5, 25);
-  textAlign(CENTER);
-  textFont(fonts.get("variable"));
+  loadDefaults();
 
   if ( ! levelRunning ) {
     textSize(20);

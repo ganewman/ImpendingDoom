@@ -19,11 +19,10 @@ public abstract class Tower extends Placeable {
     return radius;
   }
 
-  @Override void draw() {
-    super.draw();
-    fill(#5C00C6, 70);
+  void drawRadius() {
+    fill(colors.get("background"), 70);
     ellipse(X, Y, this.getRadius(), this.getRadius());
-    fill(#5C00C6);
+    fill(colors.get("background"));
   }
 
   void setRadius(float radius) {

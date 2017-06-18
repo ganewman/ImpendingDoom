@@ -14,17 +14,21 @@ public class Board {
     update();
 
     stroke(colors.get("tan"));
-    strokeWeight(20);
     for ( int i = 0; i < path.size() - 1; i++ ) {
       line(path.get(i)[0], path.get(i)[1], path.get(i + 1)[0], path.get(i + 1)[1]);
     }
-    noStroke();
+    loadDefaults();
+
     for ( Enemy e: enemiesOnBoard ) {
       e.draw();
     }
 
     for (Tower t : towers) {
       t.draw();
+    }
+
+    for ( Tower t : towers ) {
+      t.drawRadius();
     }
   }
 
